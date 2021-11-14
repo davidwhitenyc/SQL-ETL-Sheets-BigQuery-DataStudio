@@ -1,6 +1,6 @@
 # ETL-Sheets-BigQuery-Data Studio - MSM Design
 
->  This repository contains SQL code that I've used to build an ETL pipeline that extracts data from Google Sheets, transforms it inside of Google BigQuery and loads it into a suite of Google Data studio dashboards.
+>  This repository contains SQL code that I've used to build an ETL pipeline that extracts data from Google Sheets, transforms it inside of Google BigQuery and, loads it into a suite of Google Data studio dashboards.
 >
 >  For more information please contact me at: david@msmdesign.nyc | [msmdesign.nyc](https://msmdesign.nyc/)
 
