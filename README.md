@@ -20,7 +20,7 @@
 
 
 
-## C. An Example Dashboard Built Using This Process
+## C. Example of a Dashboard Built Using This Process
 
 ![](https://github.com/davidwhitemsm/images-for-readme-documentation/blob/main/eets-BigQuery-Data%20Studio-Mockup-pg1.jpg)
 
