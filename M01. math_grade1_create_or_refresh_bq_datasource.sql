@@ -9,6 +9,13 @@
 SELECT *
 FROM `harlemlinksy2122.trackers.math_grade1_unit1`;
 
+--import grade 1 math unit 2 data
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade1_unit2`;
+
+--import grade 1 math unit 3 data
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade1_unit3`;
 --add a data pull for the next unit below
 
 
@@ -55,6 +62,57 @@ math_grade1_unit1_q05,
 math_grade1_unit1_q06
 
       )) ;
+
+
+--unpivot math grade 1 unit 2 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade1_unit2` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade1_unit2` UNPIVOT(points_earned FOR question_id IN (math_grade1_unit2_q01,
+math_grade1_unit2_q02,
+math_grade1_unit2_q03,
+math_grade1_unit2_q04,
+math_grade1_unit2_q05,
+math_grade1_unit2_q06,
+math_grade1_unit2_q07,
+math_grade1_unit2_q08,
+math_grade1_unit2_q09,
+math_grade1_unit2_q10
+
+      )) ;
+
+
+
+
+--unpivot math grade 1 unit 3 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade1_unit3` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade1_unit3` UNPIVOT(points_earned FOR question_id IN (
+math_grade1_unit3_q01,
+math_grade1_unit3_q02,
+math_grade1_unit3_q03,
+math_grade1_unit3_q04,
+math_grade1_unit3_q05,
+math_grade1_unit3_q06,
+math_grade1_unit3_q07,
+math_grade1_unit3_q08,
+math_grade1_unit3_q09,
+math_grade1_unit3_q10,
+math_grade1_unit3_q11,
+math_grade1_unit3_q12,
+math_grade1_unit3_q13,
+math_grade1_unit3_q14,
+math_grade1_unit3_q15
+      )) ;
 --add unpivots for new units below
 
 
@@ -75,6 +133,22 @@ SELECT
   points_earned,
 FROM
   `harlemlinksy2122.unpivots.math_grade1_unit1` 
+--pull unpivoted data from math grade 1 unit 2
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned,
+FROM
+  `harlemlinksy2122.unpivots.math_grade1_unit2` 
+--pull unpivoted data from math grade 1 unit 3
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned,
+FROM
+  `harlemlinksy2122.unpivots.math_grade1_unit3`
 --insert UNION ALL code block here for the next unit  
   
   ;

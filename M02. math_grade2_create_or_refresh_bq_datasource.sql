@@ -55,7 +55,7 @@ FROM
       )) ;
 
 
---unpivot math grade 3 unit 2 data
+--unpivot math grade 2 unit 2 data
 CREATE OR REPLACE TABLE
   `harlemlinksy2122.unpivots.math_grade2_unit2` AS
 SELECT

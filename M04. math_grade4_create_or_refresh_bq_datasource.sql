@@ -19,6 +19,15 @@ FROM `harlemlinksy2122.trackers.math_grade4_unit1`;
 SELECT *
 FROM `harlemlinksy2122.trackers.math_grade4_unit2`;
 
+--import grade 4 math unit 3 data
+
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade4_unit3`;
+
+--import grade 4 math unit 4 data
+
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade4_unit4`;
 --add a data pull for the next unit below
 
 
@@ -117,6 +126,56 @@ math_grade4_unit2_q09,
 math_grade4_unit2_q10
 
       )) ;
+
+
+--unpivot math grade 4 unit 3 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade4_unit3` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade4_unit3` UNPIVOT(points_earned FOR question_id IN (math_grade4_unit3_q01,
+math_grade4_unit3_q02,
+math_grade4_unit3_q03,
+math_grade4_unit3_q04,
+math_grade4_unit3_q05,
+math_grade4_unit3_q06,
+math_grade4_unit3_q07,
+math_grade4_unit3_q08,
+math_grade4_unit3_q09
+
+      )) ;
+
+
+
+--unpivot math grade 4 unit 4 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade4_unit4` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade4_unit4` UNPIVOT(points_earned FOR question_id IN (
+math_grade4_unit4_q01,
+math_grade4_unit4_q02,
+math_grade4_unit4_q03,
+math_grade4_unit4_q04,
+math_grade4_unit4_q05,
+math_grade4_unit4_q06,
+math_grade4_unit4_q07,
+math_grade4_unit4_q08,
+math_grade4_unit4_q09,
+math_grade4_unit4_q10,
+math_grade4_unit4_q11,
+math_grade4_unit4_q12,
+math_grade4_unit4_q13,
+math_grade4_unit4_q14,
+math_grade4_unit4_q15
+
+      )) ;
 --add unpivots for new units below
 
 
@@ -154,6 +213,23 @@ SELECT
 FROM
   `harlemlinksy2122.unpivots.math_grade4_unit2` 
   
+--pull unpivoted data from math grade 4 unit 3
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.unpivots.math_grade4_unit3` 
+
+--pull unpivoted data from math grade 4 unit 4
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.unpivots.math_grade4_unit4` 
 --insert UNION ALL code block here for the next unit  
   
   ;
@@ -205,9 +281,9 @@ SELECT
 --used to add student-assessment-level benchmarks to tables with student-question level granularity
   CASE
     WHEN SUM(points_earned)/SUM(points_available) >= .75 THEN "Achieved Benchmark"
-    WHEN SUM(points_earned)/SUM(points_available) BETWEEN .5
+    WHEN SUM(points_earned)/SUM(points_available) BETWEEN .60
   AND .74999999 THEN "Approaching Benchmark"
-    WHEN SUM(points_earned)/SUM(points_available) < .5 THEN "Below Benchmark"
+    WHEN SUM(points_earned)/SUM(points_available) < .60 THEN "Below Benchmark"
   ELSE
   ""
 END

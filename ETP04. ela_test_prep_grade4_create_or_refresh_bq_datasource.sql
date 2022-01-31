@@ -24,6 +24,26 @@ FROM `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_1_4`;
 --add a data pull for the next unit below
 
 
+--import grade 4 ela test prep quiz 2.1 data
+SELECT *
+FROM `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_1`;
+
+
+--import grade 4 ela test prep quiz 2.2 data
+SELECT *
+FROM `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_2`;
+
+
+--import grade 4 ela test prep quiz 2.3 data
+SELECT *
+FROM `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_3`;
+
+--import grade 4 ela test prep quiz 2.4 data
+SELECT *
+FROM `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_4`;
+--add a data pull for the next unit below
+
+
 
 
 
@@ -190,6 +210,148 @@ FROM
     response_test_prep_ela_grade4_quiz_1_4_q06
 
       )) ;
+
+
+
+----unpivot grade 4 ela test prep quiz 2.1
+--unpivot points earned for grade 4 ela test prep quiz 2.1
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_1` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_1` UNPIVOT(points_earned FOR question_id IN (test_prep_ela_grade4_quiz_2_1_q01,
+    test_prep_ela_grade4_quiz_2_1_q02,
+    test_prep_ela_grade4_quiz_2_1_q03,
+    test_prep_ela_grade4_quiz_2_1_q04,
+    test_prep_ela_grade4_quiz_2_1_q05,
+    test_prep_ela_grade4_quiz_2_1_q06
+
+      )) ;
+--unpivot multiple choice responses for grade 4 ela test prep quiz 2.1
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_1_responses` AS
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_1` UNPIVOT(student_answer FOR question_id IN (response_test_prep_ela_grade4_quiz_2_1_q01,
+    response_test_prep_ela_grade4_quiz_2_1_q02,
+    response_test_prep_ela_grade4_quiz_2_1_q03,
+    response_test_prep_ela_grade4_quiz_2_1_q04,
+    response_test_prep_ela_grade4_quiz_2_1_q05,
+    response_test_prep_ela_grade4_quiz_2_1_q06
+
+      )) ;
+
+
+
+----unpivot grade 4 ela test prep quiz 2.2
+--unpivot points earned for grade 4 ela test prep quiz 2.2
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_2` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_2` UNPIVOT(points_earned FOR question_id IN (test_prep_ela_grade4_quiz_2_2_q01,
+    test_prep_ela_grade4_quiz_2_2_q02,
+    test_prep_ela_grade4_quiz_2_2_q03,
+    test_prep_ela_grade4_quiz_2_2_q04,
+    test_prep_ela_grade4_quiz_2_2_q05,
+    test_prep_ela_grade4_quiz_2_2_q06,
+    test_prep_ela_grade4_quiz_2_2_q07
+
+      )) ;
+--unpivot multiple choice responses for grade 4 ela test prep quiz 2.2
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_2_responses` AS
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_2` UNPIVOT(student_answer FOR question_id IN (response_test_prep_ela_grade4_quiz_2_2_q01,
+    response_test_prep_ela_grade4_quiz_2_2_q02,
+    response_test_prep_ela_grade4_quiz_2_2_q03,
+    response_test_prep_ela_grade4_quiz_2_2_q04,
+    response_test_prep_ela_grade4_quiz_2_2_q05,
+    response_test_prep_ela_grade4_quiz_2_2_q06
+
+      )) ;
+
+
+
+----unpivot grade 4 ela test prep quiz 2.3
+--unpivot points earned for grade 4 ela test prep quiz 2.3
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_3` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_3` UNPIVOT(points_earned FOR question_id IN (test_prep_ela_grade4_quiz_2_3_q01,
+    test_prep_ela_grade4_quiz_2_3_q02,
+    test_prep_ela_grade4_quiz_2_3_q03,
+    test_prep_ela_grade4_quiz_2_3_q04,
+    test_prep_ela_grade4_quiz_2_3_q05
+
+      )) ;
+--unpivot multiple choice responses for grade 4 ela test prep quiz 2.3
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_3_responses` AS
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_3` UNPIVOT(student_answer FOR question_id IN (response_test_prep_ela_grade4_quiz_2_3_q01,
+    response_test_prep_ela_grade4_quiz_2_3_q02,
+    response_test_prep_ela_grade4_quiz_2_3_q03,
+    response_test_prep_ela_grade4_quiz_2_3_q04,
+    response_test_prep_ela_grade4_quiz_2_3_q05
+
+      )) ;
+
+
+
+----unpivot grade 4 ela test prep quiz 2.4
+--unpivot points earned for grade 4 ela test prep quiz 2.4
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_4` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_4` UNPIVOT(points_earned FOR question_id IN (test_prep_ela_grade4_quiz_2_4_q01,
+    test_prep_ela_grade4_quiz_2_4_q02,
+    test_prep_ela_grade4_quiz_2_4_q03,
+    test_prep_ela_grade4_quiz_2_4_q04,
+    test_prep_ela_grade4_quiz_2_4_q05,
+    test_prep_ela_grade4_quiz_2_4_q06
+
+      )) ;
+--unpivot multiple choice responses for grade 4 ela test prep quiz 2.4
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_4_responses` AS
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+  `harlemlinksy2122.trackers.ela_test_prep_grade4_quiz_2_4` UNPIVOT(student_answer FOR question_id IN (response_test_prep_ela_grade4_quiz_2_4_q01,
+    response_test_prep_ela_grade4_quiz_2_4_q02,
+    response_test_prep_ela_grade4_quiz_2_4_q03,
+    response_test_prep_ela_grade4_quiz_2_4_q04,
+    response_test_prep_ela_grade4_quiz_2_4_q05
+
+      )) ;
 --add unpivots for new quizzes below
 
 
@@ -236,7 +398,39 @@ SELECT
   points_earned
 FROM
  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_1_4` 
-  --insert UNION ALL code block here for the next quiz 
+--pull unpivoted data from grade 4 ela test prep quiz 2.1
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_1`
+--pull unpivoted data from grade 4 ela test prep quiz 2.2
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_2`
+--pull unpivoted data from grade 4 ela test prep quiz 2.3
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_3`
+--pull unpivoted data from grade 4 ela test prep quiz 2.4
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_4`
+--insert UNION ALL code block here for the next quiz 
   
   ;
 
@@ -276,10 +470,41 @@ SELECT
   student_answer
 FROM
  `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_1_4_responses` 
-  --insert UNION ALL code block here for the next quiz 
+--pull unpivoted data from grade 4 ela test prep quiz 2.1 responses
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_1_responses` 
+--pull unpivoted data from grade 4 ela test prep quiz 2.2 responses
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_2_responses` 
+--pull unpivoted data from grade 4 ela test prep quiz 2.3 responses
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_3_responses` 
+--pull unpivoted data from grade 4 ela test prep quiz 2.4 responses
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  student_answer
+FROM
+ `harlemlinksy2122.unpivots.ela_test_prep_grade4_quiz_2_4_responses` 
+--insert UNION ALL code block here for the next quiz 
   
   ;
-
 
 
 

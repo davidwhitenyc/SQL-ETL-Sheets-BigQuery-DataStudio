@@ -19,6 +19,15 @@ FROM `harlemlinksy2122.trackers.math_grade3_unit1`;
 SELECT *
 FROM `harlemlinksy2122.trackers.math_grade3_unit2`;
 
+
+--import grade 3 math unit 3 data
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade3_unit3`;
+
+
+--import grade 3 math unit 4 data
+SELECT *
+FROM `harlemlinksy2122.trackers.math_grade3_unit4`;
 --add a data pull for the next unit below
 
 
@@ -114,8 +123,59 @@ math_grade3_unit2_q02,
 math_grade3_unit2_q03,
 math_grade3_unit2_q04,
 math_grade3_unit2_q05,
-math_grade3_unit2_q06
---add question 7 after teachers enter constructed response grades
+math_grade3_unit2_q06,
+math_grade3_unit2_q07
+
+
+      )) ;
+
+
+--unpivot math grade 3 unit 3 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade3_unit3` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade3_unit3` UNPIVOT(points_earned FOR question_id IN (math_grade3_unit3_q01,
+math_grade3_unit3_q02,
+math_grade3_unit3_q03,
+math_grade3_unit3_q04,
+math_grade3_unit3_q05,
+math_grade3_unit3_q06,
+math_grade3_unit3_q07,
+math_grade3_unit3_q08,
+math_grade3_unit3_q09,
+math_grade3_unit3_q10,
+math_grade3_unit3_q11,
+math_grade3_unit3_q12
+
+      )) ;
+
+
+
+--unpivot math grade 3 unit 4 data
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.unpivots.math_grade3_unit4` AS
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.trackers.math_grade3_unit4` UNPIVOT(points_earned FOR question_id IN (
+math_grade3_unit4_q01,
+math_grade3_unit4_q02,
+math_grade3_unit4_q03,
+math_grade3_unit4_q04,
+math_grade3_unit4_q05,
+math_grade3_unit4_q06,
+math_grade3_unit4_q07,
+math_grade3_unit4_q08,
+math_grade3_unit4_q09,
+math_grade3_unit4_q10,
+math_grade3_unit4_q11,
+math_grade3_unit4_q12
 
       )) ;
 --add unpivots for new units below
@@ -154,7 +214,22 @@ SELECT
   points_earned
 FROM
   `harlemlinksy2122.unpivots.math_grade3_unit2` 
-  
+--pull unpivoted data from math grade 3 unit 3
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.unpivots.math_grade3_unit3` 
+--pull unpivoted data from math grade 3 unit 4
+UNION ALL
+SELECT
+  osis,
+  question_id,
+  points_earned
+FROM
+  `harlemlinksy2122.unpivots.math_grade3_unit4` 
 --insert UNION ALL code block here for the next unit  
   
   ;
@@ -194,7 +269,7 @@ WHERE
 
 
 
---[step 01.7] use the results table to calculate benchmarks using CASE WHEN
+--[step 01.7a] use the results table to calculate benchmarks by unit using CASE WHEN
    
 CREATE OR REPLACE TABLE
   `harlemlinksy2122.benchmarks.math_grade3` AS
@@ -205,9 +280,9 @@ SELECT
 --used to add student-assessment-level benchmarks to tables with student-question level granularity
   CASE
     WHEN SUM(points_earned)/SUM(points_available) >= .75 THEN "Achieved Benchmark"
-    WHEN SUM(points_earned)/SUM(points_available) BETWEEN .5
+    WHEN SUM(points_earned)/SUM(points_available) BETWEEN .6
   AND .74999999 THEN "Approaching Benchmark"
-    WHEN SUM(points_earned)/SUM(points_available) < .5 THEN "Below Benchmark"
+    WHEN SUM(points_earned)/SUM(points_available) < .6 THEN "Below Benchmark"
   ELSE
   ""
 END
@@ -221,7 +296,29 @@ GROUP BY
   2 ;
 
 
-
+--[step 01.7b] use the results table to calculate overall benchmarks using CASE WHEN
+   
+CREATE OR REPLACE TABLE
+  `harlemlinksy2122.benchmarks.overall_math_grade3` AS
+SELECT
+  osis,
+  SUM(points_earned)/SUM(points_available) AS math_pct_points,
+--used to add student-assessment-level benchmarks to tables with student-question level granularity
+  CASE
+    WHEN SUM(points_earned)/SUM(points_available) >= .75 THEN "Achieved Benchmark"
+    WHEN SUM(points_earned)/SUM(points_available) BETWEEN .6
+  AND .74999999 THEN "Approaching Benchmark"
+    WHEN SUM(points_earned)/SUM(points_available) < .6 THEN "Below Benchmark"
+  ELSE
+  ""
+END
+  AS overall_benchmark_math_level3
+FROM
+  `harlemlinksy2122.results.math_grade3`
+WHERE
+  osis IS NOT NULL
+GROUP BY
+  1 ;
 
 
 
@@ -252,8 +349,9 @@ SELECT
   results.unit,
   points_earned,
   points_available,
-  math_pct_points,
-  math_benchmark
+  benchmarks.math_pct_points,
+  math_benchmark,
+  overall_benchmark_math_level3
 
 FROM
   `harlemlinksy2122.results.math_grade3` results
@@ -267,6 +365,11 @@ LEFT JOIN
 `harlemlinksy2122.benchmarks.math_grade3` benchmarks
 
 ON results.osis = benchmarks.osis AND results.unit = benchmarks.unit
+
+LEFT JOIN
+`harlemlinksy2122.benchmarks.overall_math_grade3` overall_benchmarks
+
+ON results.osis = overall_benchmarks.osis 
 
 WHERE results.osis IS NOT NULL ;
 
