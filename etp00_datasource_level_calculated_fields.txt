@@ -1,0 +1,8 @@
+Quiz-Question
+
+CONCAT(quiz,"---", upper(RIGHT_TEXT(question_id, 3)))
+
+
+Pct. Points
+
+SUM(points_earned)/SUM(points_available)
